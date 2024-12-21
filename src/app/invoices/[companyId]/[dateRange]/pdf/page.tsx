@@ -14,6 +14,7 @@ import { Table, TD, TH, TR } from "@ag-media/react-pdf-table";
 import { totalData } from "./data";
 import { useParams } from 'next/navigation';
 import dayjs from 'dayjs';
+import { getRelevantDates } from '@/app/methods/dates';
 
 interface Job {
   obligation_company_id: string;
@@ -21,7 +22,6 @@ interface Job {
   obligation_obligation_date: string;
   reference_number: string;
   obligation_reference_number: string;
-  status: string;
   notes: string;
   obligation_due_date: string;
   obligation_amount_due: number;
@@ -41,6 +41,10 @@ export default function InvoicePDFPage() {
   const jobs: Job[] = data;
   const filteredJobs = jobs.filter((job: Job) => job.obligation_company_id == companyId);
   const companyName = filteredJobs.length > 0 ? filteredJobs[0].obligation_company_name : '';
+
+  const firstWeekOfJulyJobs = getRelevantDates(filteredJobs, "2024-07-12");
+
+  console.log(firstWeekOfJulyJobs);
 
   const InvoicePDF = () => (
     <Document>
@@ -69,12 +73,11 @@ export default function InvoicePDFPage() {
             <TD style={styles.td}>Issue Date</TD>
             <TD style={styles.td}>Reference Number</TD>
             <TD style={styles.td}>Obligation Reference Number</TD>
-            <TD style={styles.td}>Status</TD>
             <TD style={styles.td}>Notes</TD>
             <TD style={styles.td}>Due Date</TD>
             <TD style={styles.td}>Obligation Amount Due</TD>
           </TH>
-          {filteredJobs.map((job, index) => (
+          {firstWeekOfJulyJobs.map((job, index) => (
             <TR key={index}>
               <TD style={styles.td}>
                 {dayjs(job.obligation_obligation_date).format('MMMM DD, YYYY')}
@@ -84,13 +87,6 @@ export default function InvoicePDFPage() {
               </TD>
               <TD style={styles.td}>
                 {job.obligation_reference_number}
-              </TD>
-              <TD style={styles.td}>
-                {job.status === 'approved' ? (
-                  <Text style={styles.textBold}>Approved</Text>
-                ) : (
-                  <Text style={styles.textBold}>Pending</Text>
-                )}
               </TD>
               <TD style={styles.td}>
                 {job.notes}

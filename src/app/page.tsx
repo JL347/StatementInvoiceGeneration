@@ -19,10 +19,12 @@ export default function Home() {
   []);
   
   const jobs = data;
-
   const everrisJobs = jobs.filter(job => job.obligation_company_name === 'EVERRIS NA INC 941634227');
   const zfWabcoJobs = jobs.filter(job => job.obligation_company_name === 'ZF Wabco');
 
+  const everrisCompanyName = everrisJobs.length > 0 ? everrisJobs[0].obligation_company_name : '';
+  const zfWabcoCompanyName = zfWabcoJobs.length > 0 ? zfWabcoJobs[0].obligation_company_name : '';
+  
   const everrisCompanyId = everrisJobs.length > 0 ? everrisJobs[0].obligation_company_id : '';
   const zfWabcoCompanyId = zfWabcoJobs.length > 0 ? zfWabcoJobs[0].obligation_company_id : '';
 
@@ -31,12 +33,16 @@ export default function Home() {
       <h1 className="text-5xl font-bold">
         Statement Invoice Generation
       </h1>
-      <div>
+      <div className="flex justify-center gap-4">
         <Link href={`/invoices/${everrisCompanyId}`}>
-          <button className="text-2xl font-semibold text-blue-500">EVERRIS NA INC 941634227</button>
+          <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+            {everrisCompanyName}
+          </button>
         </Link>
         <Link href={`/invoices/${zfWabcoCompanyId}`}>
-          <button className="text-2xl font-semibold text-blue-500">ZF Wabco</button>
+          <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+            {zfWabcoCompanyName}
+          </button>
         </Link>
       </div>
     </main>

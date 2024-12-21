@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { FileDown } from 'lucide-react';
+import { getRelevantDates } from '@/app/methods/dates';
 
 interface Job {
   obligation_company_id: string;
@@ -12,7 +13,6 @@ interface Job {
   obligation_obligation_date: string;
   reference_number: string;
   obligation_reference_number: string;
-  status: string;
   notes: string;
   obligation_due_date: string;
   obligation_amount_due: number;
@@ -33,6 +33,11 @@ export default function Home() {
   const filteredJobs = jobs.filter((job: Job) => job.obligation_company_id == companyId);
   const companyName = filteredJobs.length > 0 ? filteredJobs[0].obligation_company_name : '';
 
+  const firstWeekOfJulyJobs = getRelevantDates(filteredJobs, "2024-07-12");
+  const dateRange = "2024-07-12";
+
+  console.log(firstWeekOfJulyJobs);
+
   return (
     <main className="p-8" id="invoice">
       <div className="px-4 sm:px-6 lg:px-8">
@@ -42,7 +47,7 @@ export default function Home() {
               {companyName} Statement Invoice
             </h1>
             <p className="mt-2 text-sm text-gray-700">
-              List of jobs
+              List of all jobs
             </p>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
@@ -53,6 +58,15 @@ export default function Home() {
               >
                 <FileDown size={16} />
                 Download PDF
+              </button>
+            </Link>
+            <Link href={`/invoices/${companyId}/${dateRange}/pdf`}>
+              <button
+                type="button"
+                className="inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              >
+                <FileDown size={16} />
+                First Week of July PDF
               </button>
             </Link>
           </div>
@@ -74,9 +88,6 @@ export default function Home() {
                         Obligation Reference Number
                       </th>
                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                        Status
-                      </th>
-                      <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                         Notes
                       </th>
                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -91,7 +102,7 @@ export default function Home() {
                     {filteredJobs.map((job) => (
                       <tr key={job.obligation_company_id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                          {dayjs(job.obligation_obligation_date).format('MMMM DD, YYYY h:mm A')}
+                          {dayjs(job.obligation_obligation_date).format('MMMM DD, YYYY')}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {job.reference_number}
@@ -99,22 +110,11 @@ export default function Home() {
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {job.obligation_reference_number}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm capitalize">
-                          {job.status === 'approved' ? (
-                            <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                              {job.status}
-                            </span>
-                          ) : ( 
-                            <span className="inline-flex items-center rounded-full bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
-                              {job.status}
-                            </span>
-                          )}
-                        </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {job.notes}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {dayjs(job.obligation_due_date).format('MMMM DD, YYYY h:mm A')}
+                          {dayjs(job.obligation_due_date).format('MMMM DD, YYYY')}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           ${(job.obligation_amount_due).toFixed(2)}
