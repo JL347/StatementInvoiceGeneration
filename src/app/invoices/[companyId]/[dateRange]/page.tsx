@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { FileDown } from 'lucide-react';
 import { getRelevantDates } from '@/app/methods/dates';
 import { Undo2 } from 'lucide-react';
+import Papa from 'papaparse';
 
 interface Job {
   obligation_company_id: string;
@@ -40,6 +41,44 @@ export default function Home() {
 
   const totalObligationAmount = obligationAmounts.reduce((a, b) => a + b, 0);
 
+  const jobsForCsv = updatedJobs.map((job) => ({
+    'Issue Date': dayjs(job.obligation_obligation_date).format('MMMM DD, YYYY'),
+    'Reference Number': job.reference_number,
+    'Obligation Reference Number': job.obligation_reference_number,
+    'Notes': job.notes,
+    'Due Date': dayjs(job.obligation_due_date).format('MMMM DD, YYYY'),
+    'Obligation Amount Due': job.obligation_amount_due,
+  }));
+
+  function downloadAsCSV(data: {
+    'Issue Date': string;
+    'Reference Number': string;
+    'Obligation Reference Number': string;
+    'Notes': string;
+    'Due Date': string;
+    'Obligation Amount Due': number;
+    }[],
+    filename: string = 'table.csv'): void {
+    
+    // Convert data to CSV using PapaParse
+    const csv = Papa.unparse(data);
+
+    // Create a Blob from the CSV string
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+
+    // Create a download link
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+
+    link.setAttribute('href', url);
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <main className="p-8" id="invoice">
       <div className="px-4 sm:px-6 lg:px-8">
@@ -62,6 +101,14 @@ export default function Home() {
                 Download PDF
               </button>
             </Link>
+            <button
+              type="button"
+              className="ml-2 inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              onClick={() => downloadAsCSV(jobsForCsv, `${companyName} Statement Invoice - ${dateRange}.csv`)}
+            >
+              <FileDown size={16} />
+              Download CSV
+            </button>
             <Link href={`/`}>
               <button className="ml-2 inline-flex items-center gap-x-1.5 border border-gray-100 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
                 <Undo2 size={16} />
