@@ -8,6 +8,7 @@ import { FileDown } from 'lucide-react';
 import { getRelevantDates } from '@/app/methods/dates';
 import { Undo2 } from 'lucide-react';
 import Papa from 'papaparse';
+import { formatToUSD } from '@/app/methods/format';
 
 interface Job {
   obligation_company_id: string;
@@ -163,7 +164,7 @@ export default function Home() {
                           {dayjs(job.obligation_due_date).format('MMMM DD, YYYY')}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          ${(job.obligation_amount_due).toFixed(2)}
+                          {formatToUSD(job.obligation_amount_due)}
                         </td>
                       </tr>
                     ))}
@@ -172,7 +173,7 @@ export default function Home() {
                         Total
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold text-gray-900">
-                        ${totalObligationAmount.toFixed(2)}
+                        {formatToUSD(totalObligationAmount)}
                       </td>
                     </tr>
                   </tbody>

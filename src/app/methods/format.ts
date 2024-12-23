@@ -1,5 +1,10 @@
-function formatToUSD(amount: number): string {
-  return amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-}
+export function formatToUSD(amount: number): string {
+  if (isNaN(amount)) {
+    throw new Error("Invalid number provided");
+  }
 
-export default formatToUSD;
+  return amount.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+}

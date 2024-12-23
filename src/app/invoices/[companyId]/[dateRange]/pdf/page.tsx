@@ -16,6 +16,7 @@ import dayjs from 'dayjs';
 import { getRelevantDates } from '@/app/methods/dates';
 import Link from 'next/link';
 import { FileDown, Undo2 } from 'lucide-react';
+import { formatToUSD } from '@/app/methods/format';
 
 interface Job {
   obligation_company_id: string;
@@ -98,7 +99,7 @@ export default function InvoicePDFPage() {
                 {dayjs(job.obligation_due_date).format('MMMM DD, YYYY')}
               </TD>
               <TD style={styles.td}>
-                ${(job.obligation_amount_due).toFixed(2)}
+                {formatToUSD(job.obligation_amount_due)}
               </TD>
             </TR>
           ))}
@@ -121,7 +122,7 @@ export default function InvoicePDFPage() {
                 Total Amount Due
               </Text>
               <Text style={styles.textBold}>
-                ${totalObligationAmount.toFixed(2)}
+                {formatToUSD(totalObligationAmount)}
               </Text>
             </View>
           </View>

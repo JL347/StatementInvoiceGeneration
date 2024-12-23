@@ -69,7 +69,7 @@ export default function Home() {
 
             <MenuItems
               transition
-              className="absolute right-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+              className="absolute right-0 z-10 mt-2 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
             >
               <div className="py-1">
                 <MenuItem>
@@ -77,7 +77,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of July 19th
+                      2024-07-11 - 2024-07-17
                     </span>
                   </Link>
                 </MenuItem>
@@ -86,7 +86,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of July 12th
+                      2024-07-04 - 2024-07-10
                     </span>
                   </Link>
                 </MenuItem>
@@ -95,7 +95,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of July 5th
+                      2024-06-27 - 2024-07-03
                     </span>
                   </Link>
                 </MenuItem>
@@ -104,7 +104,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of June 28th
+                      2024-06-20 - 2024-06-26
                     </span>
                   </Link>
                 </MenuItem>
@@ -113,7 +113,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of June 21st
+                      2024-06-13 - 2024-06-19
                     </span>
                   </Link>
                 </MenuItem>
@@ -122,7 +122,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of June 14th
+                      2024-06-06 - 2024-06-12
                     </span>
                   </Link>
                 </MenuItem>
@@ -131,7 +131,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of June 7th
+                      2024-05-30 - 2024-06-05
                     </span>
                   </Link>
                 </MenuItem>
@@ -140,7 +140,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of May 31st
+                      2024-05-23 - 2024-05-29
                     </span>
                   </Link>
                 </MenuItem>
@@ -149,7 +149,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of May 24th
+                      2024-05-16 - 2024-05-22
                     </span>
                   </Link>
                 </MenuItem>
@@ -158,7 +158,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of May 17th
+                      2024-05-09 - 2024-05-15
                     </span>
                   </Link>
                 </MenuItem>
@@ -167,7 +167,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of May 10th
+                      2024-05-02 - 2024-05-08
                     </span>
                   </Link>
                 </MenuItem>
@@ -176,7 +176,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of May 3rd
+                      2024-04-25 - 2024-05-01
                     </span>
                   </Link>
                 </MenuItem>
@@ -198,7 +198,7 @@ export default function Home() {
 
             <MenuItems
               transition
-              className="absolute right-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+              className="absolute right-0 z-10 mt-2 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
             >
               <div className="py-1">
                 <MenuItem>
@@ -206,7 +206,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of July 12th
+                      2024-07-04 - 2024-07-10
                     </span>
                   </Link>
                 </MenuItem>
@@ -215,7 +215,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of July 5th
+                      2024-06-27 - 2024-07-03
                     </span>
                   </Link>
                 </MenuItem>
@@ -224,7 +224,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of June 28th
+                      2024-06-20 - 2024-06-26
                     </span>
                   </Link>
                 </MenuItem>
@@ -233,7 +233,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of June 21st
+                      2024-06-13 - 2024-06-19
                     </span>
                   </Link>
                 </MenuItem>
@@ -242,7 +242,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of June 14th
+                      2024-06-06 - 2024-06-12
                     </span>
                   </Link>
                 </MenuItem>
@@ -251,7 +251,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of June 7th
+                      2024-05-30 - 2024-06-05
                     </span>
                   </Link>
                 </MenuItem>
@@ -260,7 +260,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of May 31st
+                      2024-05-23 - 2024-05-29
                     </span>
                   </Link>
                 </MenuItem>
@@ -269,7 +269,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of May 24th
+                      2024-05-16 - 2024-05-22
                     </span>
                   </Link>
                 </MenuItem>
@@ -278,7 +278,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of May 17th
+                      2024-05-09 - 2024-05-15
                     </span>
                   </Link>
                 </MenuItem>
@@ -287,7 +287,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of May 10th
+                      2024-05-02 - 2024-05-08
                     </span>
                   </Link>
                 </MenuItem>
@@ -296,7 +296,7 @@ export default function Home() {
                     <span
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                     >
-                      Week of May 3rd
+                      2024-04-25 - 2024-05-01
                     </span>
                   </Link>
                 </MenuItem>
