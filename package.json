@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ag-media/react-pdf-table": "^2.0.0",
+    "@headlessui/react": "^2.2.0",
     "@react-pdf/renderer": "^4.1.5",
     "axios": "^1.7.9",
     "dayjs": "^1.11.13",

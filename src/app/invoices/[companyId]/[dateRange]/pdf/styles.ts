@@ -29,14 +29,16 @@ export const styles = StyleSheet.create({
   },
   table: {
     width: "100%",
-    borderColor: "1px solid #f3f4f6",
+    borderColor: "1px solid #e5e7eb",
     margin: "20px 0",
   },
   tableHeader: {
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#f3f4f6",
+    fontSize: 11,
   },
   td: {
     padding: 6,
+    fontSize: 10,
   },
   totals: {
     display: "flex",

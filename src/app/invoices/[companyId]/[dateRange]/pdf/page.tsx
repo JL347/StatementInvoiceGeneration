@@ -149,7 +149,7 @@ export default function InvoicePDFPage() {
                 Download PDF
               </button>
             </PDFDownloadLink>
-            <Link href={`/`}>
+            <Link href={`/invoices/${companyId}/${dateRange}`}>
               <button className="ml-2 inline-flex items-center gap-x-1.5 border border-gray-100 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
                 <Undo2 size={16} />
                 Back

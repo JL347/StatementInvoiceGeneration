@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
+import { ChevronDown } from 'lucide-react';
 
 interface Job {
   obligation_company_id: string;
@@ -53,176 +55,254 @@ export default function Home() {
         Statement Invoice Generation
       </h1>
       <div className="flex justify-center space-x-12">
-        <div className="space-y-2">
-          <h1 className="text-xl font-semibold underline">
+        <div>
+          <h1 className="text-xl font-medium underline">
             {everrisCompanyName}
           </h1>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${julyNinteenthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of July 19th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${julyTwelfthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of July 12th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${julyFifthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of July 5th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${juneTwentyEighthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of June 28th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${juneTwentyFirstRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of June 21st
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${juneFourteenthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of June 14th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${juneSeventhRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of June 7th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${mayThirtyFirstRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of May 31st
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${mayTwentyFourthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of May 24th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${maySeventeenthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of May 17th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${mayTenthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of May 10th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${everrisCompanyId}/${mayThirdRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of May 3rd
-              </button>
-            </Link>
-          </div>
+          <Menu as="div" className="relative inline-block text-left mt-3">
+            <div>
+              <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                Select Date Range
+                <ChevronDown size={16} className="mt-0.5" />
+              </MenuButton>
+            </div>
+
+            <MenuItems
+              transition
+              className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+            >
+              <div className="py-1">
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${julyNinteenthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of July 19th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${julyTwelfthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of July 12th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${julyFifthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of July 5th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${juneTwentyEighthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of June 28th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${juneTwentyFirstRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of June 21st
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${juneFourteenthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of June 14th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${juneSeventhRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of June 7th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${mayThirtyFirstRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of May 31st
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${mayTwentyFourthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of May 24th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${maySeventeenthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of May 17th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${mayTenthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of May 10th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${everrisCompanyId}/${mayThirdRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of May 3rd
+                    </span>
+                  </Link>
+                </MenuItem>
+              </div>
+            </MenuItems>
+          </Menu>
         </div>
-        <div className="space-y-2">
-          <h1 className="text-xl font-semibold underline">
+        <div>
+          <h1 className="text-xl font-medium underline">
             {zfWabcoCompanyName}
           </h1>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${julyTwelfthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of July 12th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${julyFifthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of July 5th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${juneTwentyEighthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of June 28th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${juneTwentyFirstRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of June 21st
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${juneFourteenthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of June 14th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${juneSeventhRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of June 7th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${mayThirtyFirstRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of May 31st
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${mayTwentyFourthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of May 24th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${maySeventeenthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of May 17th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${mayTenthRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of May 10th
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link href={`/invoices/${zfWabcoCompanyId}/${mayThirdRange}`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Week of May 3rd
-              </button>
-            </Link>
-          </div>
+          <Menu as="div" className="relative inline-block text-left mt-3">
+            <div>
+              <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                Select Date Range
+                <ChevronDown size={16} className="mt-0.5" />
+              </MenuButton>
+            </div>
+
+            <MenuItems
+              transition
+              className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+            >
+              <div className="py-1">
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${julyTwelfthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of July 12th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${julyFifthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of July 5th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${juneTwentyEighthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of June 28th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${juneTwentyFirstRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of June 21st
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${juneFourteenthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of June 14th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${juneSeventhRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of June 7th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${mayThirtyFirstRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of May 31st
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${mayTwentyFourthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of May 24th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${maySeventeenthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of May 17th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${mayTenthRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of May 10th
+                    </span>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href={`/invoices/${zfWabcoCompanyId}/${mayThirdRange}`}>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                    >
+                      Week of May 3rd
+                    </span>
+                  </Link>
+                </MenuItem>
+              </div>
+            </MenuItems>
+          </Menu>
         </div>
       </div>
     </main>
