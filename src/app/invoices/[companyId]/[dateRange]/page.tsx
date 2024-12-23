@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { FileDown } from 'lucide-react';
+import { FileDown, Download } from 'lucide-react';
 import { getRelevantDates } from '@/app/methods/dates';
 import { Undo2 } from 'lucide-react';
 import Papa from 'papaparse';
@@ -38,7 +38,6 @@ export default function Home() {
   const companyName = filteredJobs.length > 0 ? filteredJobs[0].obligation_company_name : '';
 
   const updatedJobs = getRelevantDates(filteredJobs, Array.isArray(dateRange) ? dateRange[0] : dateRange);
-  console.log(updatedJobs)
 
   const obligationAmounts = updatedJobs.map((job) => job.obligation_amount_due);
 
@@ -109,7 +108,7 @@ export default function Home() {
               className="ml-2 inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               onClick={() => downloadAsCSV(jobsForCsv, `${companyName} Statement Invoice - ${dateRange}.csv`)}
             >
-              <FileDown size={16} />
+              <Download size={16} />
               Download CSV
             </button>
             <Link href={`/`}>
