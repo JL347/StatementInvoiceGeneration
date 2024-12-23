@@ -8,6 +8,7 @@ import {
   Document,
   PDFViewer,
   PDFDownloadLink,
+  pdf
 } from "@react-pdf/renderer";
 import { styles } from "./styles";
 import { Table, TD, TH, TR } from "@ag-media/react-pdf-table";
@@ -15,8 +16,9 @@ import { useParams } from 'next/navigation';
 import dayjs from 'dayjs';
 import { getRelevantDates } from '@/app/methods/dates';
 import Link from 'next/link';
-import { FileDown, Undo2 } from 'lucide-react';
+import { FileDown, Undo2, SendHorizonal } from 'lucide-react';
 import { formatToUSD } from '@/app/methods/format';
+import axios from 'axios';
 
 interface Job {
   obligation_company_id: string;
@@ -131,6 +133,31 @@ export default function InvoicePDFPage() {
     </Document>
   );
 
+  const handleSendPDF = async () => {
+    try {
+      // Generate the PDF as a blob
+      const pdfInstance = pdf(<InvoicePDF />);
+      const blob = await pdfInstance.toBlob();
+
+      // Create FormData for the file
+      const formData = new FormData();
+      formData.append('file', blob, `${companyName} Statement Invoice.pdf`);
+
+      // Send the PDF to Zapier webhook
+      const zapierWebhookURL = 'https://hooks.zapier.com/hooks/catch/21082030/289vbnl/';
+      await axios.post(zapierWebhookURL, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      alert('PDF sent successfully!');
+    } catch (error) {
+      console.error('Error sending PDF:', error);
+      alert('Failed to send the PDF. Please try again.');
+    }
+  };
+
   return (
     <div>
       {data ? (
@@ -144,14 +171,22 @@ export default function InvoicePDFPage() {
             <PDFDownloadLink document={<InvoicePDF />} fileName={`${companyName} Statement Invoice.pdf`}>
               <button
                 type="button"
-                className="inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                className="inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm border border-gray-100 font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               >
                 <FileDown size={16} />
                 Download PDF
               </button>
             </PDFDownloadLink>
+            <button
+              type="button"
+              onClick={handleSendPDF}
+              className="ml-2 inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm border border-gray-100 font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            >
+              <SendHorizonal size={16} />
+              Send PDF
+            </button>
             <Link href={`/invoices/${companyId}/${dateRange}`}>
-              <button className="ml-2 inline-flex items-center gap-x-1.5 border border-gray-100 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+              <button className="ml-2 inline-flex items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm border border-gray-100 font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
                 <Undo2 size={16} />
                 Back
               </button>

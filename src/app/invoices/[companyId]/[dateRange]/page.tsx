@@ -48,7 +48,7 @@ export default function Home() {
     'Obligation Reference Number': job.obligation_reference_number,
     'Notes': job.notes,
     'Due Date': dayjs(job.obligation_due_date).format('MMMM DD, YYYY'),
-    'Obligation Amount Due': job.obligation_amount_due,
+    'Obligation Amount Due': formatToUSD(job.obligation_amount_due),
   }));
 
   function downloadAsCSV(data: {
@@ -57,7 +57,7 @@ export default function Home() {
     'Obligation Reference Number': string;
     'Notes': string;
     'Due Date': string;
-    'Obligation Amount Due': number;
+    'Obligation Amount Due': string;
     }[],
     filename: string = 'table.csv'): void {
     
