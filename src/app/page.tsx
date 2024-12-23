@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { ChevronDown } from 'lucide-react';
+import axios from 'axios';
 
 interface Job {
   obligation_company_id: string;
@@ -20,9 +21,9 @@ export default function Home() {
   const [data, setData] = useState<Job[]>([]);
 
   useEffect(() => {
-    fetch('/jobs.json')
-      .then((res) => res.json())
-      .then((data) => setData(data));
+    axios.get('/jobs.json')
+      .then((response) => setData(response.data))
+      .catch((error) => console.error('Error fetching jobs:', error));
     },
   []);
   

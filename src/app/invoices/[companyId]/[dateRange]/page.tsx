@@ -9,6 +9,7 @@ import { getRelevantDates } from '@/app/methods/dates';
 import { Undo2 } from 'lucide-react';
 import Papa from 'papaparse';
 import { formatToUSD } from '@/app/methods/format';
+import axios from 'axios';
 
 interface Job {
   obligation_company_id: string;
@@ -26,9 +27,9 @@ export default function Home() {
   const [data, setData] = useState<Job[]>([]);
 
   useEffect(() => {
-    fetch('/jobs.json')
-      .then((res) => res.json())
-      .then((data) => setData(data));
+    axios.get('/jobs.json')
+      .then((response) => setData(response.data))
+      .catch((error) => console.error('Error fetching jobs:', error));
     },
   []);
   
@@ -37,6 +38,7 @@ export default function Home() {
   const companyName = filteredJobs.length > 0 ? filteredJobs[0].obligation_company_name : '';
 
   const updatedJobs = getRelevantDates(filteredJobs, Array.isArray(dateRange) ? dateRange[0] : dateRange);
+  console.log(updatedJobs)
 
   const obligationAmounts = updatedJobs.map((job) => job.obligation_amount_due);
 

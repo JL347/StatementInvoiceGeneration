@@ -36,9 +36,9 @@ export default function InvoicePDFPage() {
   const [data, setData] = useState<Job[]>([]);
 
   useEffect(() => {
-    fetch('/jobs.json')
-      .then((res) => res.json())
-      .then((data) => setData(data));
+    axios.get('/jobs.json')
+      .then((response) => setData(response.data))
+      .catch((error) => console.error('Error fetching jobs:', error));
     },
   []);
   
