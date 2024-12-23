@@ -183,7 +183,7 @@ export default function InvoicePDFPage() {
               className="ml-2 inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm border border-gray-100 font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             >
               <SendHorizonal size={16} />
-              Send PDF
+              Send PDF via Email
             </button>
             <Link href={`/invoices/${companyId}/${dateRange}`}>
               <button className="ml-2 inline-flex items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm border border-gray-100 font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
