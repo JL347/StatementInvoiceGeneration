@@ -29,7 +29,7 @@ export const getRelevantDates = (
   // Get the prior Thursday
   const priorThursday = currentWednesday.subtract(6, "day"); // 6 days back
 
-  // Filter receivables within the range
+  // Filter jobs within the range
   const relevantJobs = jobs.filter((job) => {
     const jobDate = dayjs(job.obligation_obligation_date);
     return jobDate.isBetween(priorThursday, currentWednesday, "day", "[]");

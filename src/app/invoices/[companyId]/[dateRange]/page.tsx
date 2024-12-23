@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { FileDown } from 'lucide-react';
 import { getRelevantDates } from '@/app/methods/dates';
+import { Undo2 } from 'lucide-react';
 
 interface Job {
   obligation_company_id: string;
@@ -19,7 +20,7 @@ interface Job {
 }
 
 export default function Home() {
-  const { companyId } = useParams()
+  const { companyId, dateRange } = useParams()
   const [data, setData] = useState<Job[]>([]);
 
   useEffect(() => {
@@ -33,10 +34,11 @@ export default function Home() {
   const filteredJobs = jobs.filter((job: Job) => job.obligation_company_id == companyId);
   const companyName = filteredJobs.length > 0 ? filteredJobs[0].obligation_company_name : '';
 
-  const firstWeekOfJulyJobs = getRelevantDates(filteredJobs, "2024-07-12");
-  const dateRange = "2024-07-12";
+  const updatedJobs = getRelevantDates(filteredJobs, Array.isArray(dateRange) ? dateRange[0] : dateRange);
 
-  console.log(firstWeekOfJulyJobs);
+  const obligationAmounts = updatedJobs.map((job) => job.obligation_amount_due);
+
+  const totalObligationAmount = obligationAmounts.reduce((a, b) => a + b, 0);
 
   return (
     <main className="p-8" id="invoice">
@@ -47,11 +49,11 @@ export default function Home() {
               {companyName} Statement Invoice
             </h1>
             <p className="mt-2 text-sm text-gray-700">
-              List of all jobs
+              List of jobs for the week leading up to {dateRange}.
             </p>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <Link href={`/invoices/${companyId}/pdf`}>
+            <Link href={`/invoices/${companyId}/${dateRange}/pdf`}>
               <button
                 type="button"
                 className="inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
@@ -60,13 +62,10 @@ export default function Home() {
                 Download PDF
               </button>
             </Link>
-            <Link href={`/invoices/${companyId}/${dateRange}/pdf`}>
-              <button
-                type="button"
-                className="inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-              >
-                <FileDown size={16} />
-                First Week of July PDF
+            <Link href={`/`}>
+              <button className="ml-2 inline-flex items-center gap-x-1.5 border border-gray-100 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                <Undo2 size={16} />
+                Back
               </button>
             </Link>
           </div>
@@ -99,7 +98,7 @@ export default function Home() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {filteredJobs.map((job) => (
+                    {updatedJobs.map((job) => (
                       <tr key={job.obligation_company_id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                           {dayjs(job.obligation_obligation_date).format('MMMM DD, YYYY')}
@@ -121,6 +120,14 @@ export default function Home() {
                         </td>
                       </tr>
                     ))}
+                    <tr>
+                      <td colSpan={5} className="text-right py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                        Total
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold text-gray-900">
+                        ${totalObligationAmount.toFixed(2)}
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>

@@ -11,10 +11,11 @@ import {
 } from "@react-pdf/renderer";
 import { styles } from "./styles";
 import { Table, TD, TH, TR } from "@ag-media/react-pdf-table";
-import { totalData } from "./data";
 import { useParams } from 'next/navigation';
 import dayjs from 'dayjs';
 import { getRelevantDates } from '@/app/methods/dates';
+import Link from 'next/link';
+import { FileDown, Undo2 } from 'lucide-react';
 
 interface Job {
   obligation_company_id: string;
@@ -28,7 +29,7 @@ interface Job {
 }
 
 export default function InvoicePDFPage() {
-  const { companyId } = useParams();
+  const { companyId, dateRange } = useParams();
   const [data, setData] = useState<Job[]>([]);
 
   useEffect(() => {
@@ -42,9 +43,11 @@ export default function InvoicePDFPage() {
   const filteredJobs = jobs.filter((job: Job) => job.obligation_company_id == companyId);
   const companyName = filteredJobs.length > 0 ? filteredJobs[0].obligation_company_name : '';
 
-  const firstWeekOfJulyJobs = getRelevantDates(filteredJobs, "2024-07-12");
+  const updatedJobs = getRelevantDates(filteredJobs, Array.isArray(dateRange) ? dateRange[0] : dateRange);
 
-  console.log(firstWeekOfJulyJobs);
+  const obligationAmounts = updatedJobs.map((job) => job.obligation_amount_due);
+
+  const totalObligationAmount = obligationAmounts.reduce((a, b) => a + b, 0);
 
   const InvoicePDF = () => (
     <Document>
@@ -77,7 +80,7 @@ export default function InvoicePDFPage() {
             <TD style={styles.td}>Due Date</TD>
             <TD style={styles.td}>Obligation Amount Due</TD>
           </TH>
-          {firstWeekOfJulyJobs.map((job, index) => (
+          {updatedJobs.map((job, index) => (
             <TR key={index}>
               <TD style={styles.td}>
                 {dayjs(job.obligation_obligation_date).format('MMMM DD, YYYY')}
@@ -107,23 +110,20 @@ export default function InvoicePDFPage() {
               minWidth: "256px",
             }}
           >
-            {totalData.map((item) => (
-              <View
-                key={item.label}
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: "8px",
-                }}
-              >
-                <Text style={item.label === "Total" ? styles.textBold : {}}>
-                  {item.label}
-                </Text>
-                <Text style={item.label === "Total" ? styles.textBold : {}}>
-                  {item.value}
-                </Text>
-              </View>
-            ))}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginBottom: "8px",
+              }}
+            >
+              <Text style={{ marginLeft: "75px"}}>
+                Total Amount Due
+              </Text>
+              <Text style={styles.textBold}>
+                ${totalObligationAmount.toFixed(2)}
+              </Text>
+            </View>
           </View>
         </View>
       </Page>
@@ -141,10 +141,20 @@ export default function InvoicePDFPage() {
           </div>
           <div className="mt-6 flex justify-center">
             <PDFDownloadLink document={<InvoicePDF />} fileName={`${companyName} Statement Invoice.pdf`}>
-              <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+              <button
+                type="button"
+                className="inline-flex items-center gap-x-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              >
+                <FileDown size={16} />
                 Download PDF
               </button>
             </PDFDownloadLink>
+            <Link href={`/`}>
+              <button className="ml-2 inline-flex items-center gap-x-1.5 border border-gray-100 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                <Undo2 size={16} />
+                Back
+              </button>
+            </Link>
           </div>
         </div>
       ) : (
