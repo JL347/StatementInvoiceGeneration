@@ -22,7 +22,7 @@ interface Job {
   obligation_amount_due: number;
 }
 
-export default function Home() {
+export default function InvoiceTablePage() {
   const { companyId, dateRange } = useParams()
   const [data, setData] = useState<Job[]>([]);
 
