@@ -77,6 +77,7 @@ export default function InvoicePDFPage() {
         <Table style={styles.table}>
           <TH style={[styles.tableHeader, styles.textBold]}>
             <TD style={styles.td}>Issue Date</TD>
+            <TD style={styles.td}>Obligation Company ID</TD>
             <TD style={styles.td}>Reference Number</TD>
             <TD style={styles.td}>Obligation Reference Number</TD>
             <TD style={styles.td}>Notes</TD>
@@ -87,6 +88,9 @@ export default function InvoicePDFPage() {
             <TR key={index}>
               <TD style={styles.td}>
                 {dayjs(job.obligation_obligation_date).format('MMMM DD, YYYY')}
+              </TD>
+              <TD style={styles.td}>
+                {job.obligation_company_id}
               </TD>
               <TD style={styles.td}>
                 {job.reference_number}

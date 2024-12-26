@@ -10,6 +10,8 @@ import { Undo2 } from 'lucide-react';
 import Papa from 'papaparse';
 import { formatToUSD } from '@/app/methods/format';
 import axios from 'axios';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
+import { ChevronDown } from 'lucide-react';
 
 interface Job {
   obligation_company_id: string;
@@ -81,6 +83,21 @@ export default function InvoiceTablePage() {
     document.body.removeChild(link);
   }
 
+  const julyNinteenthRange = "2024-07-19";
+  const julyTwelfthRange = "2024-07-12";
+  const julyFifthRange = "2024-07-05";
+  const juneTwentyEighthRange = "2024-06-28";
+  const juneTwentyFirstRange = "2024-06-21";
+  const juneFourteenthRange = "2024-06-14";
+  const juneSeventhRange = "2024-06-07";
+  const mayThirtyFirstRange = "2024-05-31";
+  const mayTwentyFourthRange = "2024-05-24";
+  const maySeventeenthRange = "2024-05-17";
+  const mayTenthRange = "2024-05-10";
+  const mayThirdRange = "2024-05-03";
+
+  const everrisCompanyId = Number(companyId) === 68813;
+
   return (
     <main className="p-8" id="invoice">
       <div className="px-4 sm:px-6 lg:px-8">
@@ -92,6 +109,134 @@ export default function InvoiceTablePage() {
             <p className="mt-2 text-sm text-gray-700">
               List of jobs for the week leading up to {dateRange}.
             </p>
+            <div>
+              <Menu as="div" className="relative inline-block text-left mt-3">
+                <div>
+                  <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                    Select Date Range
+                    <ChevronDown size={16} className="mt-0.5" />
+                  </MenuButton>
+                </div>
+
+                <MenuItems
+                  transition
+                  className="absolute right-0 z-10 mt-2 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                >
+                  <div className="py-1">
+                    {everrisCompanyId && (
+                      <MenuItem>
+                        <Link href={`/invoices/${companyId}/${julyNinteenthRange}`}>
+                          <span
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                          >
+                            2024-07-11 - 2024-07-17
+                          </span>
+                        </Link>
+                      </MenuItem>
+                    )}
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${julyTwelfthRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-07-04 - 2024-07-10
+                        </span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${julyFifthRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-06-27 - 2024-07-03
+                        </span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${juneTwentyEighthRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-06-20 - 2024-06-26
+                        </span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${juneTwentyFirstRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-06-13 - 2024-06-19
+                        </span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${juneFourteenthRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-06-06 - 2024-06-12
+                        </span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${juneSeventhRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-05-30 - 2024-06-05
+                        </span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${mayThirtyFirstRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-05-23 - 2024-05-29
+                        </span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${mayTwentyFourthRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-05-16 - 2024-05-22
+                        </span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${maySeventeenthRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-05-09 - 2024-05-15
+                        </span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${mayTenthRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-05-02 - 2024-05-08
+                        </span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link href={`/invoices/${companyId}/${mayThirdRange}`}>
+                        <span
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                        >
+                          2024-04-25 - 2024-05-01
+                        </span>
+                      </Link>
+                    </MenuItem>
+                  </div>
+                </MenuItems>
+              </Menu>
+            </div>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
             <Link href={`/invoices/${companyId}/${dateRange}/pdf`}>
@@ -118,6 +263,7 @@ export default function InvoiceTablePage() {
               </button>
             </Link>
           </div>
+          
         </div>
         <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -128,6 +274,9 @@ export default function InvoiceTablePage() {
                     <tr>
                       <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
                         Issue Date
+                      </th>
+                      <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                        Obligation Company ID
                       </th>
                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                         Reference Number
@@ -153,6 +302,9 @@ export default function InvoiceTablePage() {
                           {dayjs(job.obligation_obligation_date).format('MMMM DD, YYYY')}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {job.obligation_company_id}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {job.reference_number}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -170,8 +322,8 @@ export default function InvoiceTablePage() {
                       </tr>
                     ))}
                     <tr>
-                      <td colSpan={5} className="text-right py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                        Total
+                      <td colSpan={6} className="text-right py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                        Total Amount Due
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold text-gray-900">
                         {formatToUSD(totalObligationAmount)}
